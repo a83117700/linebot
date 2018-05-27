@@ -79,7 +79,7 @@ def handle_text_message(event):                  # default
 
     # 針對使用者各種訊息的回覆 Start =========
     line_bot_api.reply_message(
-        event.reply_token,message)
+        event.reply_token,menu)
         #TextSendMessage(text=msg)
         
 
