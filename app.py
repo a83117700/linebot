@@ -39,15 +39,11 @@ def callback():
 
     return 'OK'
 
-# ================= 機器人區塊 Start =================
-@handler.add(MessageEvent, message=TextMessage)  # default
-def handle_text_message(event):                  # default
-    msg = event.message.text #message from user
-
+def menu():
     message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
-                thumbnail_image_url='https://imgur.com/gallery/v46xREN',
+                thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
                 title='Menu',
                 text='Please select',
                 actions=[
@@ -67,6 +63,18 @@ def handle_text_message(event):                  # default
                 ]
             )
         )
+
+    return message
+
+# ================= 機器人區塊 Start =================
+@handler.add(MessageEvent, message=TextMessage)  # default
+def handle_text_message(event):                  # default
+    msg = event.message.text #message from user
+    #label = event.message.label
+    #data = event.message.data
+
+
+    
 
 
     # 針對使用者各種訊息的回覆 Start =========
