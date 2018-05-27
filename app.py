@@ -45,12 +45,12 @@ def handle_text_message(event):                  # default
     text = event.message.text #message from user
     #data = event.message.data
 
-    if(text = 'postback text'):
-        message = TextSendMessage(text='postback')
+    if(text == 'postback text'):
+        message = TextSendMessage(text == 'postback')
     elif(text = 'message text')
-        message = TextSendMessage(text='不愛阿你長那麼醜')
+        message = TextSendMessage(text == '不愛阿你長那麼醜')
     else:
-        message = TextSendMessage(text=text)
+        message = TextSendMessage(text == text)
     message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
