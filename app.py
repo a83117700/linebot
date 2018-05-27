@@ -47,8 +47,10 @@ def handle_text_message(event):                  # default
 
     if(text == 'postback text'):
         message = TextSendMessage(text = 'postback')
+        line_bot_api.reply_message(event.reply_token,message)
     elif(text == 'message text'):
         message = TextSendMessage(text = '不愛阿你長那麼醜')
+        line_bot_api.reply_message(event.reply_token,message)
     else:
         #message = TextSendMessage(text = text)
         message = TemplateSendMessage(
@@ -74,11 +76,11 @@ def handle_text_message(event):                  # default
                     ]
                 )
             )
+        line_bot_api.reply_message(event.reply_token,message)
 
 
     # 針對使用者各種訊息的回覆 Start =========
-    line_bot_api.reply_message(
-        event.reply_token,message)
+    #line_bot_api.reply_message(event.reply_token,message)
         #TextSendMessage(text=msg)
         
 
