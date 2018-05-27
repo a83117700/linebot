@@ -47,7 +47,7 @@ def handle_text_message(event):                  # default
 
     if(text == 'postback text'):
         message = TextSendMessage(text = 'postback')
-    elif(text == 'message text')
+    elif(text == 'message text'):
         message = TextSendMessage(text = '不愛阿你長那麼醜')
     else:
         message = TextSendMessage(text = text)
