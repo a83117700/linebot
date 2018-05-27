@@ -50,30 +50,30 @@ def handle_text_message(event):                  # default
     elif(text == 'message text'):
         message = TextSendMessage(text = '不愛阿你長那麼醜')
     else:
-        message = TextSendMessage(text = text)
-    message = TemplateSendMessage(
-            alt_text='Buttons template',
-            template=ButtonsTemplate(
-                thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
-                title='Menu',
-                text='Please select',
-                actions=[
-                    PostbackTemplateAction(
-                        label='postback',
-                        text='postback text',
-                        data='action=buy&itemid=1'
-                    ),
-                    MessageTemplateAction(
-                        label='他愛我嘛',
-                        text='message text'
-                    ),
-                    URITemplateAction(
-                        label='偷看帥哥FB',
-                        uri='https://www.facebook.com/'
-                    )
-                ]
+        #message = TextSendMessage(text = text)
+        message = TemplateSendMessage(
+                alt_text='Buttons template',
+                template=ButtonsTemplate(
+                    thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
+                    title='Menu',
+                    text='Please select',
+                    actions=[
+                        PostbackTemplateAction(
+                            label='postback',
+                            text='postback text',
+                            data='action=buy&itemid=1'
+                        ),
+                        MessageTemplateAction(
+                            label='他愛我嘛',
+                            text='message text'
+                        ),
+                        URITemplateAction(
+                            label='偷看帥哥FB',
+                            uri='https://www.facebook.com/'
+                        )
+                    ]
+                )
             )
-        )
 
 
     # 針對使用者各種訊息的回覆 Start =========
