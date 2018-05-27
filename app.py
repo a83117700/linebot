@@ -42,14 +42,8 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)  # default
 def handle_text_message(event):                  # default
     msg = event.message.text #message from user
-
-
-
-    # 針對使用者各種訊息的回覆 Start =========
-    line_bot_api.reply_message(
-        event.reply_token,
-        #TextSendMessage(text=msg)
-        message = TemplateSendMessage(
+    
+    message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
                 thumbnail_image_url='https://example.com/image.jpg',
@@ -72,6 +66,12 @@ def handle_text_message(event):                  # default
                 ]
             )
         )
+
+
+    # 針對使用者各種訊息的回覆 Start =========
+    line_bot_api.reply_message(
+        event.reply_token,
+        #TextSendMessage(text=msg)
         message)
 
     # 針對使用者各種訊息的回覆 End =========
