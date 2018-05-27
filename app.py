@@ -9,6 +9,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage,
+    ButtonsTemplate, PostbackTemplateAction, MessageTemplateAction, URITemplateAction,
 )
 
 app = Flask(__name__)
@@ -46,7 +47,7 @@ def handle_text_message(event):                  # default
     message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
-                thumbnail_image_url='https://example.com/image.jpg',
+                thumbnail_image_url='https://imgur.com/gallery/v46xREN',
                 title='Menu',
                 text='Please select',
                 actions=[
@@ -61,7 +62,7 @@ def handle_text_message(event):                  # default
                     ),
                     URITemplateAction(
                         label='uri',
-                        uri='http://example.com/'
+                        uri='https://www.facebook.com/'
                     )
                 ]
             )
