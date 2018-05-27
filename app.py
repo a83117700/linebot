@@ -39,7 +39,18 @@ def callback():
 
     return 'OK'
 
-def menu():
+# ================= 機器人區塊 Start =================
+@handler.add(MessageEvent, message=TextMessage)  # default
+def handle_text_message(event):                  # default
+    text = event.message.text #message from user
+    #data = event.message.data
+
+    if(text = 'postback text'):
+        message = TextSendMessage(text='postback')
+    elif(text = 'message text')
+        message = TextSendMessage(text='不愛阿你長那麼醜')
+    else:
+        message = TextSendMessage(text=text)
     message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
@@ -53,33 +64,21 @@ def menu():
                         data='action=buy&itemid=1'
                     ),
                     MessageTemplateAction(
-                        label='message',
+                        label='他愛我嘛',
                         text='message text'
                     ),
                     URITemplateAction(
-                        label='uri',
+                        label='偷看帥哥FB',
                         uri='https://www.facebook.com/'
                     )
                 ]
             )
         )
 
-    return message
-
-# ================= 機器人區塊 Start =================
-@handler.add(MessageEvent, message=TextMessage)  # default
-def handle_text_message(event):                  # default
-    msg = event.message.text #message from user
-    #label = event.message.label
-    #data = event.message.data
-
-
-    
-
 
     # 針對使用者各種訊息的回覆 Start =========
     line_bot_api.reply_message(
-        event.reply_token,menu)
+        event.reply_token,message)
         #TextSendMessage(text=msg)
         
 
