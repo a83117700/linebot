@@ -8,7 +8,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage,
 )
 
 app = Flask(__name__)
@@ -42,7 +42,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)  # default
 def handle_text_message(event):                  # default
     msg = event.message.text #message from user
-    
+
     message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
