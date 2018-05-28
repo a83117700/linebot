@@ -90,16 +90,19 @@ def handle_text_message(event):                  # default
                         ]
                     )
                 )
+            line_bot_api.reply_message(event.reply_token,message)
         else:
             message = TextSendMessage(text = text)
-        line_bot_api.reply_message(event.reply_token,message)
+            line_bot_api.reply_message(event.reply_token,message)
     elif(status == 'food'):
         text_entity = Luis_handler.luis(text)
         if((text_entity) is str):
             msg = text_entity
+            message = TextSendMessage(text = msg)
+            line_bot_api.reply_message(event.reply_token,message)
         else:
             msg = '已記錄: '+text_entity[2]+text_entity[4]+text_entity[3]+text_entity[0]+text_entity[1]
-        message = TextSendMessage(text = msg)
+            message = TextSendMessage(text = msg)
         line_bot_api.reply_message(event.reply_token,message)
 
 
