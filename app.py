@@ -96,7 +96,33 @@ def handle_text_message(event):                  # default
             line_bot_api.reply_message(event.reply_token,message)
     elif(status == 'food'):
         text_entity = Luis_handler.luis(text)
-        if((text_entity) is str):
+        if(text == 'Hi'):
+            msg = TemplateSendMessage(
+                    alt_text='Buttons template',
+                    template=ButtonsTemplate(
+                        thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
+                        title='Menu',
+                        text='Please select',
+                        actions=[
+                            PostbackTemplateAction(
+                                label='功能維修中',
+                                text='我手賤想點',
+                                data='no'
+                            ),
+                            PostbackTemplateAction(
+                                label='紀錄食物喜好',
+                                text='紀錄食物喜好',
+                                data='food'
+                            ),
+                            URITemplateAction(
+                                label='偷看帥哥FB',
+                                uri='https://www.facebook.com/'
+                            )
+                        ]
+                    )
+                )
+            line_bot_api.reply_message(event.reply_token,msg)
+        elif((text_entity) is str):
             msg = text_entity
             message = TextSendMessage(text = msg)
             line_bot_api.reply_message(event.reply_token,message)
