@@ -78,7 +78,7 @@ def handle_text_message(event):                  # default
                                 text='我手賤想點',
                                 data='no'
                             ),
-                            MessageTemplateAction(
+                            PostbackTemplateAction(
                                 label='紀錄食物喜好',
                                 text='紀錄食物喜好',
                                 data='food'
