@@ -102,6 +102,7 @@ def handle_text_message(event):                  # default
             line_bot_api.reply_message(event.reply_token,message)
         else:
             msg = '已記錄: '+str(text_entity['like'])+str(text_entity['store'])+str(text_entity['size'])+str(text_entity['flavor'])+str(text_entity['food'])
+            msg = msg.replace('None','')
             message = TextSendMessage(text = msg)
             line_bot_api.reply_message(event.reply_token,message)
 
