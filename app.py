@@ -11,6 +11,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage,
     ButtonsTemplate, PostbackTemplateAction, MessageTemplateAction, URITemplateAction,
 )
+import Luis_handler
 
 app = Flask(__name__)
 
@@ -39,16 +40,17 @@ def callback():
 
     return 'OK'
 
+
 # ================= 機器人區塊 Start =================
 @handler.add(MessageEvent, message=TextMessage)  # default
 def handle_text_message(event):                  # default
     text = event.message.text #message from user
-    #data = event.message.data
+    data = event.message.data
 
     if(text == 'postback text'):
-        message = TextSendMessage(text = 'postback')
+        message = TextSendMessage(text = data)
         line_bot_api.reply_message(event.reply_token,message)
-    elif(text == 'message text'):
+    elif(text == '請以一句話詳細的輸入你喜歡或討厭的食物'):
         message = TextSendMessage(text = '不愛阿你長那麼醜')
         line_bot_api.reply_message(event.reply_token,message)
     else:
@@ -66,8 +68,8 @@ def handle_text_message(event):                  # default
                             data='action=buy&itemid=1'
                         ),
                         MessageTemplateAction(
-                            label='他愛我嘛',
-                            text='message text'
+                            label='紀錄食物喜好',
+                            text='請以一句話詳細的輸入你喜歡或討厭的食物'
                         ),
                         URITemplateAction(
                             label='偷看帥哥FB',
