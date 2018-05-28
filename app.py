@@ -57,6 +57,7 @@ def handle_text_message(event):                  # default
     global status
 
 
+
     if event.message.text != "":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text="紀錄成功"))
         pass
