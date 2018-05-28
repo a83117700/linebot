@@ -18,6 +18,7 @@ app = Flask(__name__)
 handler = WebhookHandler('99dd2331052c6790122bbf11df028ac1') 
 line_bot_api = LineBotApi('Hr4G/v9C8g+GDrUeyBN0t0u9WlqjxBsUOuRJquRl7mOd/QVOzC5ac7EZs8ZOVLFbbOYh/N5eVl7Lurmcx+4dUGpszUTapHFu2TT6eeHjCnuBlrRIOEeLWaxzbYejsfzx6APLyxPYH+AXD8zulT/TFQdB04t89/1O/w1cDnyilFU=') 
 
+status = 0
 
 @app.route('/')
 def index():
@@ -45,8 +46,9 @@ def callback():
 @handler.add(PostbackEvent)
 def handle_postback(event):
     if event.postback.data == 'ping':
+        status = status+1
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text='pong'))
+            event.reply_token, TextSendMessage(text=status))
     elif event.postback.data == 'datetime_postback':
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
@@ -58,12 +60,10 @@ def handle_postback(event):
 def handle_text_message(event):                  # default
     text = event.message.text #message from user
 
-    """if(text == 'postback text'):
-                    message = TextSendMessage(text = data)
-                    line_bot_api.reply_message(event.reply_token,message)"""
-    if(text == '請以一句話詳細的輸入你喜歡或討厭的食物'):
-        message = TextSendMessage(text = '不愛阿你長那麼醜')
+    if(text == '紀錄食物喜好'):
+        message = TextSendMessage(text = '請以一句話詳細的輸入你喜歡或討厭的食物')
         line_bot_api.reply_message(event.reply_token,message)
+    elif
     else:
         message = TemplateSendMessage(
                 alt_text='Buttons template',
@@ -79,7 +79,7 @@ def handle_text_message(event):                  # default
                         ),
                         MessageTemplateAction(
                             label='紀錄食物喜好',
-                            text='請以一句話詳細的輸入你喜歡或討厭的食物'
+                            text='紀錄食物喜好'
                         ),
                         URITemplateAction(
                             label='偷看帥哥FB',
