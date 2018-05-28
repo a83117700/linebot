@@ -45,7 +45,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)  # default
 def handle_text_message(event):                  # default
     text = event.message.text #message from user
-    data = event.message.data
+    data = event.postback.postback.data
 
     if(text == 'postback text'):
         message = TextSendMessage(text = data)
