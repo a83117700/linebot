@@ -42,15 +42,26 @@ def callback():
 
 
 # ================= 機器人區塊 Start =================
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    if event.postback.data == 'ping':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text='pong'))
+    elif event.postback.data == 'datetime_postback':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
+    elif event.postback.data == 'date_postback':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=event.postback.params['date']))
+
 @handler.add(MessageEvent, message=TextMessage)  # default
 def handle_text_message(event):                  # default
     text = event.message.text #message from user
-    data = event.postback.postback.data
 
-    if(text == 'postback text'):
-        message = TextSendMessage(text = data)
-        line_bot_api.reply_message(event.reply_token,message)
-    elif(text == '請以一句話詳細的輸入你喜歡或討厭的食物'):
+    """if(text == 'postback text'):
+                    message = TextSendMessage(text = data)
+                    line_bot_api.reply_message(event.reply_token,message)"""
+    if(text == '請以一句話詳細的輸入你喜歡或討厭的食物'):
         message = TextSendMessage(text = '不愛阿你長那麼醜')
         line_bot_api.reply_message(event.reply_token,message)
     else:
@@ -64,7 +75,7 @@ def handle_text_message(event):                  # default
                         PostbackTemplateAction(
                             label='postback',
                             text='postback text',
-                            data='action=buy&itemid=1'
+                            data='ping'
                         ),
                         MessageTemplateAction(
                             label='紀錄食物喜好',
