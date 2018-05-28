@@ -103,7 +103,7 @@ def handle_text_message(event):                  # default
         else:
             msg = '已記錄: '+text_entity[2]+text_entity[4]+text_entity[3]+text_entity[0]+text_entity[1]
             message = TextSendMessage(text = msg)
-        line_bot_api.reply_message(event.reply_token,message)
+            line_bot_api.reply_message(event.reply_token,message)
 
 
     # 針對使用者各種訊息的回覆 Start =========
