@@ -98,7 +98,8 @@ def handle_text_message(event):                  # default
         if((text_entity) is str):
             msg = text_entity
         else:
-            msg = text_entity['like']+text_entity['store']+text_entity['size']+text_entity['flavor']+text_entity['food']
+            msg = text_entity
+            #msg = text_entity['like']+text_entity['store']+text_entity['size']+text_entity['flavor']+text_entity['food']
         message = TextSendMessage(text = msg)
         line_bot_api.reply_message(event.reply_token,message)
 
