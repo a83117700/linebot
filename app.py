@@ -11,7 +11,8 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage,
     ButtonsTemplate, PostbackTemplateAction, MessageTemplateAction, URITemplateAction, PostbackEvent,
 )
-import Luis_handler, google_sheet
+import Luis_handler
+import google_sheet
 
 app = Flask(__name__)
 

@@ -13,13 +13,13 @@ class google_sheet(object):
 	def auth_gss_client(path, scopes):
 	    credentials = ServiceAccountCredentials.from_json_keyfile_name(path, scopes)
 	    return gspread.authorize(credentials)
+	
+	def update_sheet(ID, food, like, flavor, size, store):
+		date = time.strftime("%c")
+		spreadsheet_key = '1B-Ghm54KLT--4qgIfhn3aUfuJlnzEGVnWski_HqJhIA'
 
-    def update_sheet(ID, food, like, flavor, size, store):
-    	date = time.strftime("%c")
-    	spreadsheet_key = '1B-Ghm54KLT--4qgIfhn3aUfuJlnzEGVnWski_HqJhIA'
-
-    	gss_client = self.auth_gss_client(auth_json_path, gss_scopes)
-	    wks = gss_client.open_by_key(key)
-	    sheet = wks.sheet1
-	    sheet.insert_row([date, ID, food, like, flavor, size, store], 2)
+		gss_client = self.auth_gss_client(auth_json_path, gss_scopes)
+		wks = gss_client.open_by_key(key)
+		sheet = wks.sheet1
+		sheet.insert_row([date, ID, food, like, flavor, size, store], 2)
 	
