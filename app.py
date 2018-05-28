@@ -18,6 +18,7 @@ app = Flask(__name__)
 handler = WebhookHandler('99dd2331052c6790122bbf11df028ac1') 
 line_bot_api = LineBotApi('Hr4G/v9C8g+GDrUeyBN0t0u9WlqjxBsUOuRJquRl7mOd/QVOzC5ac7EZs8ZOVLFbbOYh/N5eVl7Lurmcx+4dUGpszUTapHFu2TT6eeHjCnuBlrRIOEeLWaxzbYejsfzx6APLyxPYH+AXD8zulT/TFQdB04t89/1O/w1cDnyilFU=') 
 
+global status 
 status = 0
 
 @app.route('/')
@@ -46,6 +47,7 @@ def callback():
 @handler.add(PostbackEvent)
 def handle_postback(event):
     if event.postback.data == 'ping':
+        global status
         status = status+1
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=status))
