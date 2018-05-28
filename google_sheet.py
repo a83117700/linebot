@@ -19,7 +19,7 @@ def update_sheet(ID, food, like, flavor, size, store):
 	spreadsheet_key = '1B-Ghm54KLT--4qgIfhn3aUfuJlnzEGVnWski_HqJhIA'
 
 	gss_client = auth_gss_client(auth_json_path, gss_scopes)
-	wks = gss_client.open_by_key(key)
+	wks = gss_client.open_by_key(spreadsheet_key)
 	sheet = wks.sheet1
 	sheet.insert_row([date, ID, food, like, flavor, size, store], 2)
 	
