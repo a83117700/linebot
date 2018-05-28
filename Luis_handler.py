@@ -1,5 +1,4 @@
-class Menu(object):
-     """docstring for Menu"""
+class Luis_handler(object):
     def __init__(self, arg):
-        super(Menu, self).__init__()
+        super(Luis_handler, self).__init__()
         self.arg = arg
