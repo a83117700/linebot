@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "sweet-man",
+  "private_key_id": "d9c2b8272f1f686ee69586a0a8e8b576aa13a7dc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCRTYGw0m82Dl+p\ndaICmUB62rAGRDiphJQusaOSV4yR2FVCyNk80xNYdbZyEpTs10XRdq5tILqxG+2U\nEYja5ujome+qWmsqQoDkqUcQfgKCFijlhV8Y3YgxMktP4DpWIE4PB1obbudFNJqR\nKZ7eWi8tWSjshnj4FGOdVznWkAzAn9fr1OeI4BRLqoIwgV+TbELACsx5zeXU3vrf\n2tl18hAeTGHtR8HwVHqUe1EXpNqrC78XcKUv4ZouaE2cKYDfTh4uJiZhXWa0DZ4U\nqHSXgoxXByio3lL8bdpfWhhhhe7t8OiDbXR8u9ejk4K1SFKtUa+IvRKxIb063GPg\nITenaKQLAgMBAAECggEABiYW1uS7erjLqOAm0Eqr79xRQUf3Hd/+ZVDJxeeZNegc\nXjchpPFJtZ9FmTjavysHnqrnDAyBL1LUkETYWxW/xW1o4aHx5wKUHG5iviVBoJT6\nJhGpdI6WCimWsPVMLVjbShza3fj+JcTpcDsn/et9vkLc+Hq4TnHjxUTBAyjADBFR\n4hjPF/yjpWwDBN9paPsJ+y7jiH6feBF92O/Obj3Iu44gTy8+w9n/9dCBH69jUASM\n23NDOHW4GrzPLoFHE2CS/ji3hUFwrjUKzqfVtmwzMLqjqBiQqTzgMr2D6UPTiOfa\n4fjx57hfLwI6H3C5VVmx7VxNWg077a03IijZLl/8AQKBgQDM3yxgeNMzvw1SnhHv\n61uyPt7pWF6Om9OjOcfsr6Ds8B+VUMqMUgaR1tp+C8M8uTIKiyh2eZydK/+dhA+G\n5t8EkMb6T5g3wYtUirLk6gGRGsc/i7BBQdTmWcIA2G83sn0rtIrjbhbpsvTyhMh5\nOKazEYyOyy9MLM+UhSZLtnP1PQKBgQC1kJgr6Y1Hvl5gOpSEixmlGXXaFG+XGPSk\neIGBob5HPcm8Hv3kGgySmqGpLsm1oV7qs6fQF2nb+44sGI0nU0wM7QeA7vlP9udc\n487CDdHRLixORuHwFebZ9wkzdqbD13JnOVzLFo6hcXlKILqb2U+61GYsLFrASzyc\ntJTzpMli5wKBgD7Qloylvyv4gh84tAs5wI2wVSx6mdNj18oOJ0xctRywqx5e/Rt0\n8uq4U5meBaiSp9Mvw6I/u1M9cExdd11HYE3IDholWWiPASdUt3EUhpJ1AW5saAg6\nJQrTrnYP5lnPci16V7NPx9qzsgLBz63LPuFcmhoWFlRm0OaaxJkmQfuJAoGAKlRG\nld5CWNqSCB9AJtKDLRGNf0VKatCfoISTtNQvl05ZbOlQydAk5Dz2uYm17wlrJo6x\n7fq3bFjuYWtr5SIvVcgg+rc8Gp92exqFRoqQQxNfsvQlkqKYinJki8H6ySe+fUBL\nWPGuWQcqftS4jMMSKn2AQIYqtjAUNniHTXI6nTsCgYBf90W8OzjT7fC5tD0DdEFE\nZKTXuhElE50CbVaY2RFlzuUxdwHodKR77XQnha0ksMwK9f9SIF8V7Sraep9zKI+9\ny4VBSJfjN5/ZXydLDMS6Rlj4DVp0zQ20ZCmGZHin0cVoedE5C9LgmbaS6XNUt0nY\n56JcXl6BdI8fwWPoQBRPow==\n-----END PRIVATE KEY-----\n",
+  "client_email": "sweet-man@sweet-man.iam.gserviceaccount.com",
+  "client_id": "116858467930235050553",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sweet-man%40sweet-man.iam.gserviceaccount.com"
+}

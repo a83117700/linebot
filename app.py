@@ -13,6 +13,11 @@ from linebot.models import (
 )
 import Luis_handler
 
+import sys
+import datetime
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials as SAC
+
 app = Flask(__name__)
 
 handler = WebhookHandler('99dd2331052c6790122bbf11df028ac1') 
@@ -50,6 +55,30 @@ def callback():
 def handle_text_message(event):                  # default
     text = event.message.text #message from user
     global status
+
+
+    if event.message.text != "":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="紀錄成功"))
+        pass
+        #GDriveJSON就輸入下載下來Json檔名稱
+        #GSpreadSheet是google試算表名稱
+        GDriveJSON = 'sweet-man-d9c2b8272f1f.json'
+        GSpreadSheet = 'food'
+        while True:
+            try:
+                scope = ['https://spreadsheets.google.com/feeds']
+                key = SAC.from_json_keyfile_name(GDriveJSON, scope)
+                gc = gspread.authorize(key)
+                worksheet = gc.open(GSpreadSheet).sheet1
+            except Exception as ex:
+                print('無法連線Google試算表', ex)
+                sys.exit(1)
+            textt=""
+            textt+=event.message.text
+            if textt!="":
+                worksheet.append_row((datetime.datetime.now(), textt))
+                print('新增一列資料到試算表' ,GSpreadSheet)
+                return textt    
     
     if(status == 'init'):
         if(text == 'Hi'):
@@ -114,11 +143,11 @@ def handle_text_message(event):                  # default
         elif(text == '紀錄食物喜好'):
             pass
         elif(type(text_entity) is str):
-            msg = text_entity
+            msg = text_entity+'\n若已紀錄完請輸入Hi回到選單'
             message = TextSendMessage(text = msg)
             line_bot_api.reply_message(event.reply_token,message)
         else:
-            msg = '已記錄: '+str(text_entity['like'])+str(text_entity['store'])+str(text_entity['size'])+str(text_entity['flavor'])+str(text_entity['food'])+'\n請繼續輸入，或輸入Hi回到選單'
+            msg = '已記錄: '+str(text_entity['like'])+str(text_entity['store'])+str(text_entity['size'])+str(text_entity['flavor'])+str(text_entity['food'])+'\n請繼續紀錄，或輸入Hi回到選單'
             msg = msg.replace('None','')
             message = TextSendMessage(text = msg)
             line_bot_api.reply_message(event.reply_token,message)
@@ -129,7 +158,7 @@ def handle_postback(event):
     if event.postback.data == 'food':
         global status
         status = 'food'
-        msg = '請以一句話詳細的輸入你喜歡或討厭的食物\n輸入完請輸入Hi回到選單'
+        msg = '請以一句話詳細的紀錄她喜歡或討厭的食物\n紀錄完請輸入Hi回到選單'
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=msg))
     """elif event.postback.data == 'datetime_postback':
