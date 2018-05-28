@@ -111,7 +111,7 @@ def handle_text_message(event):                  # default
                     )
                 )
             line_bot_api.reply_message(event.reply_token,msg)
-        elif(text = '紀錄食物喜好')
+        elif(text == '紀錄食物喜好')
             continue
         elif(type(text_entity) is str):
             msg = text_entity
