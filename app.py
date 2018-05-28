@@ -63,7 +63,6 @@ def handle_text_message(event):                  # default
     if(text == '紀錄食物喜好'):
         message = TextSendMessage(text = '請以一句話詳細的輸入你喜歡或討厭的食物')
         line_bot_api.reply_message(event.reply_token,message)
-    elif
     else:
         message = TemplateSendMessage(
                 alt_text='Buttons template',
