@@ -31,4 +31,4 @@ def luis(text):
             if(entity['type']=='喜好食物::不喜好'):
                 like = entity['entity']
         food_entity = {'food':food, 'flavor':flavor, 'store':store, 'size':size, 'like':like}
-    return food_entity
+        return food_entity
