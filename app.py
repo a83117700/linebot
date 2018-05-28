@@ -11,12 +11,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage,
     ButtonsTemplate, PostbackTemplateAction, MessageTemplateAction, URITemplateAction, PostbackEvent,
 )
-import Luis_handler
-
-import sys
-import datetime
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials as SAC
+import Luis_handler, google_sheet
 
 app = Flask(__name__)
 
@@ -55,31 +50,6 @@ def callback():
 def handle_text_message(event):                  # default
     text = event.message.text #message from user
     global status
-
-
-
-    if event.message.text != "":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="紀錄成功"))
-        pass
-        #GDriveJSON就輸入下載下來Json檔名稱
-        #GSpreadSheet是google試算表名稱
-        GDriveJSON = 'sweet-man-d9c2b8272f1f.json'
-        GSpreadSheet = 'food'
-        while True:
-            try:
-                scope = ['https://spreadsheets.google.com/feeds']
-                key = SAC.from_json_keyfile_name(GDriveJSON, scope)
-                gc = gspread.authorize(key)
-                worksheet = gc.open(GSpreadSheet).sheet1
-            except Exception as ex:
-                print('無法連線Google試算表', ex)
-                sys.exit(1)
-            textt=""
-            textt+=event.message.text
-            if textt!="":
-                worksheet.append_row((datetime.datetime.now(), textt))
-                print('新增一列資料到試算表' ,GSpreadSheet)
-                return textt    
     
     if(status == 'init'):
         if(text == 'Hi'):
@@ -148,6 +118,20 @@ def handle_text_message(event):                  # default
             message = TextSendMessage(text = msg)
             line_bot_api.reply_message(event.reply_token,message)
         else:
+            try:
+                ID = 'test'
+                google_sheet.update_sheet(
+                                            ID, 
+                                            str(text_entity['food']), 
+                                            str(text_entity['like']), 
+                                            str(text_entity['flavor']), 
+                                            str(text_entity['size']), 
+                                            str(text_entity['store'])
+                                            )
+            except:
+                message = TextSendMessage(text = '紀錄失敗啦幹')
+                line_bot_api.reply_message(event.reply_token,message)
+
             msg = '已記錄: '+str(text_entity['like'])+str(text_entity['store'])+str(text_entity['size'])+str(text_entity['flavor'])+str(text_entity['food'])+'\n請繼續紀錄，或輸入Hi回到選單'
             msg = msg.replace('None','')
             message = TextSendMessage(text = msg)
