@@ -19,16 +19,34 @@ def luis(text):
     else:
         for entity in json_text['entities']:
             if(entity['type']=='喜好食物::類型'):
-                food = entity['entity']
+                if(entity['entity'] is None):
+                    food = ''
+                else:
+                    food = entity['entity']
             if(entity['type']=='喜好食物::口味'):
-                flavor = entity['entity']
+                if(entity['entity'] is None):
+                    flavor = ''
+                else:
+                    flavor = entity['entity']
             if(entity['type']=='喜好食物::店家'):
-                store = entity['entity']
+                if(entity['entity'] is None):
+                    store = ''
+                else:
+                    store = entity['entity']
             if(entity['type']=='喜好食物::份量'):
-                size = entity['entity']
+                if(entity['entity'] is None):
+                    size = ''
+                else:
+                    size = entity['entity']
             if(entity['type']=='喜好食物::喜好'):
-                like = entity['entity']
+                if(entity['entity'] is None):
+                    like = ''
+                else:
+                    like = entity['entity']
             if(entity['type']=='喜好食物::不喜好'):
-                like = entity['entity']
+                if(entity['entity'] is None):
+                    like = ''
+                else:
+                    like = entity['entity']
         food_entity = {'food':food, 'flavor':flavor, 'store':store, 'size':size, 'like':like}
     return food_entity
