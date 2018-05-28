@@ -44,20 +44,7 @@ def callback():
 
 
 # ================= 機器人區塊 Start =================
-@handler.add(PostbackEvent)
-def handle_postback(event):
-    if event.postback.data == 'food':
-        global status
-        status = 'food'
-        msg = '請以一句話詳細的輸入你喜歡或討厭的食物'
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=msg))
-    """elif event.postback.data == 'datetime_postback':
-                    line_bot_api.reply_message(
-                        event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
-                elif event.postback.data == 'date_postback':
-                    line_bot_api.reply_message(
-                        event.reply_token, TextSendMessage(text=event.postback.params['date']))"""
+
 
 @handler.add(MessageEvent, message=TextMessage)  # default
 def handle_text_message(event):                  # default
@@ -135,9 +122,20 @@ def handle_text_message(event):                  # default
             line_bot_api.reply_message(event.reply_token,message)
 
 
-    # 針對使用者各種訊息的回覆 Start =========
-    #line_bot_api.reply_message(event.reply_token,message)
-        #TextSendMessage(text=msg)
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    if event.postback.data == 'food':
+        global status
+        status = 'food'
+        msg = '請以一句話詳細的輸入你喜歡或討厭的食物'
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=msg))
+    """elif event.postback.data == 'datetime_postback':
+                    line_bot_api.reply_message(
+                        event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
+                elif event.postback.data == 'date_postback':
+                    line_bot_api.reply_message(
+                        event.reply_token, TextSendMessage(text=event.postback.params['date']))"""
 
 
 # ================= 機器人區塊 End =================
