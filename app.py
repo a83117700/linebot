@@ -119,19 +119,19 @@ def handle_text_message(event):                  # default
             message = TextSendMessage(text = msg)
             line_bot_api.reply_message(event.reply_token,message)
         else:
-            try:
-                ID = 'test'
-                google_sheet.update_sheet(
-                                            ID, 
-                                            str(text_entity['food']), 
-                                            str(text_entity['like']), 
-                                            str(text_entity['flavor']), 
-                                            str(text_entity['size']), 
-                                            str(text_entity['store'])
-                                            )
-            except:
-                message = TextSendMessage(text = '紀錄失敗啦幹')
-                line_bot_api.reply_message(event.reply_token,message)
+            #try:
+            ID = 'test'
+            google_sheet.update_sheet(
+                                        ID, 
+                                        str(text_entity['food']), 
+                                        str(text_entity['like']), 
+                                        str(text_entity['flavor']), 
+                                        str(text_entity['size']), 
+                                        str(text_entity['store'])
+                                        )
+            """except:
+                                                    message = TextSendMessage(text = '紀錄失敗啦幹')
+                                                    line_bot_api.reply_message(event.reply_token,message)"""
 
             msg = '已記錄: '+str(text_entity['like'])+str(text_entity['store'])+str(text_entity['size'])+str(text_entity['flavor'])+str(text_entity['food'])+'\n請繼續紀錄，或輸入Hi回到選單'
             msg = msg.replace('None','')
