@@ -97,6 +97,8 @@ def handle_text_message(event):                  # default
     elif(status == 'food'):
         text_entity = Luis_handler.luis(text)
         if(text == 'Hi'):
+            global status
+            status = 'init'
             msg = TemplateSendMessage(
                     alt_text='Buttons template',
                     template=ButtonsTemplate(
@@ -122,7 +124,7 @@ def handle_text_message(event):                  # default
                     )
                 )
             line_bot_api.reply_message(event.reply_token,msg)
-        elif((text_entity) is str):
+        elif(type(text_entity) is str):
             msg = text_entity
             message = TextSendMessage(text = msg)
             line_bot_api.reply_message(event.reply_token,message)
