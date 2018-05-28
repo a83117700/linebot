@@ -11,7 +11,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage,
     ButtonsTemplate, PostbackTemplateAction, MessageTemplateAction, URITemplateAction,
 )
-import Luis_handler
+#import Luis_handler
 
 app = Flask(__name__)
 
@@ -54,7 +54,6 @@ def handle_text_message(event):                  # default
         message = TextSendMessage(text = '不愛阿你長那麼醜')
         line_bot_api.reply_message(event.reply_token,message)
     else:
-        #message = TextSendMessage(text = text)
         message = TemplateSendMessage(
                 alt_text='Buttons template',
                 template=ButtonsTemplate(
@@ -78,6 +77,7 @@ def handle_text_message(event):                  # default
                     ]
                 )
             )
+        #message = TextSendMessage(text = text)
         line_bot_api.reply_message(event.reply_token,message)
 
 
