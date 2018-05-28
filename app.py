@@ -94,7 +94,7 @@ def handle_text_message(event):                  # default
             message = TextSendMessage(text = text)
         line_bot_api.reply_message(event.reply_token,message)
     elif(status == 'food'):
-        text_entity = Luis_handler(text)
+        text_entity = Luis_handler.luis(text)
         if((text_entity) is str):
             msg = text_entity
         else:

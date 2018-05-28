@@ -5,7 +5,7 @@ class Luis_handler(object):
         super(Luis_handler, self).__init__()
         self.arg = arg
 
-def luis_handler(text):
+def luis(text):
     food = None
     flavor = None
     store = None
