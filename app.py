@@ -19,7 +19,7 @@ handler = WebhookHandler('99dd2331052c6790122bbf11df028ac1')
 line_bot_api = LineBotApi('Hr4G/v9C8g+GDrUeyBN0t0u9WlqjxBsUOuRJquRl7mOd/QVOzC5ac7EZs8ZOVLFbbOYh/N5eVl7Lurmcx+4dUGpszUTapHFu2TT6eeHjCnuBlrRIOEeLWaxzbYejsfzx6APLyxPYH+AXD8zulT/TFQdB04t89/1O/w1cDnyilFU=') 
 
 global status 
-status = 0
+status = 'init'
 
 @app.route('/')
 def index():
@@ -46,59 +46,67 @@ def callback():
 # ================= 機器人區塊 Start =================
 @handler.add(PostbackEvent)
 def handle_postback(event):
-    if event.postback.data == 'ping':
+    if event.postback.data == 'food':
         global status
-        status = status+1
+        status = 'food'
+        msg = '請以一句話詳細的輸入你喜歡或討厭的食物'
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=status))
-    elif event.postback.data == 'datetime_postback':
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
-    elif event.postback.data == 'date_postback':
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.postback.params['date']))
+            event.reply_token, TextSendMessage(text=msg))
+    """elif event.postback.data == 'datetime_postback':
+                    line_bot_api.reply_message(
+                        event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
+                elif event.postback.data == 'date_postback':
+                    line_bot_api.reply_message(
+                        event.reply_token, TextSendMessage(text=event.postback.params['date']))"""
 
 @handler.add(MessageEvent, message=TextMessage)  # default
 def handle_text_message(event):                  # default
     text = event.message.text #message from user
-
-    if(text == '紀錄食物喜好'):
-        message = TextSendMessage(text = '請以一句話詳細的輸入你喜歡或討厭的食物')
-        line_bot_api.reply_message(event.reply_token,message)
-    else:
-        message = TemplateSendMessage(
-                alt_text='Buttons template',
-                template=ButtonsTemplate(
-                    thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
-                    title='Menu',
-                    text='Please select',
-                    actions=[
-                        PostbackTemplateAction(
-                            label='postback',
-                            text='postback text',
-                            data='ping'
-                        ),
-                        MessageTemplateAction(
-                            label='紀錄食物喜好',
-                            text='紀錄食物喜好'
-                        ),
-                        URITemplateAction(
-                            label='偷看帥哥FB',
-                            uri='https://www.facebook.com/'
-                        )
-                    ]
+    global status
+    
+    if(status == 'init'):
+        if(text == 'Hi'):
+            message = TemplateSendMessage(
+                    alt_text='Buttons template',
+                    template=ButtonsTemplate(
+                        thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
+                        title='Menu',
+                        text='Please select',
+                        actions=[
+                            PostbackTemplateAction(
+                                label='功能維修中',
+                                text='我手賤想點',
+                                data='no'
+                            ),
+                            MessageTemplateAction(
+                                label='紀錄食物喜好',
+                                text='紀錄食物喜好',
+                                data='food'
+                            ),
+                            URITemplateAction(
+                                label='偷看帥哥FB',
+                                uri='https://www.facebook.com/'
+                            )
+                        ]
+                    )
                 )
-            )
-        #message = TextSendMessage(text = text)
+        else:
+            message = TextSendMessage(text = text)
+        line_bot_api.reply_message(event.reply_token,message)
+    elif(status == 'food'):
+        text_entity = Luis_handler(text)
+        if((text_entity) is str):
+            msg = text_entity
+        else:
+            msg = text_entity['like']+text_entity['store']+text_entity['size']+text_entity['flavor']+text_entity['food']
+        message = TextSendMessage(text = msg)
         line_bot_api.reply_message(event.reply_token,message)
 
 
     # 針對使用者各種訊息的回覆 Start =========
     #line_bot_api.reply_message(event.reply_token,message)
         #TextSendMessage(text=msg)
-        
 
-    # 針對使用者各種訊息的回覆 End =========
 
 # ================= 機器人區塊 End =================
 
