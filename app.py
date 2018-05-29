@@ -11,6 +11,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage,
     ButtonsTemplate, PostbackTemplateAction, MessageTemplateAction, URITemplateAction, PostbackEvent,
 )
+import os
 import Luis_handler
 import google_sheet
 
@@ -21,6 +22,8 @@ line_bot_api = LineBotApi('Hr4G/v9C8g+GDrUeyBN0t0u9WlqjxBsUOuRJquRl7mOd/QVOzC5ac
 
 global status 
 status = 'init'
+global user_ID
+user_ID = os.environ.get('bot_id', None)
 
 @app.route('/')
 def index():
@@ -157,6 +160,5 @@ def handle_postback(event):
 
 # ================= 機器人區塊 End =================
 
-import os
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=os.environ['PORT'])
