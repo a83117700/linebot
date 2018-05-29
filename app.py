@@ -123,9 +123,9 @@ def handle_text_message(event):                  # default
             line_bot_api.reply_message(event.reply_token,message)
         else:
             #try:
-            ID = 'test'
+            global user_ID
             google_sheet.update_sheet(
-                                        ID, 
+                                        user_ID, 
                                         str(text_entity['food']), 
                                         str(text_entity['like']), 
                                         str(text_entity['flavor']), 
