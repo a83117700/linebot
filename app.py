@@ -23,7 +23,7 @@ line_bot_api = LineBotApi('Hr4G/v9C8g+GDrUeyBN0t0u9WlqjxBsUOuRJquRl7mOd/QVOzC5ac
 global status 
 status = 'init'
 global user_ID
-user_ID = os.environ.get('bot_id', None)
+
 
 @app.route('/')
 def index():
@@ -124,6 +124,7 @@ def handle_text_message(event):                  # default
         else:
             #try:
             global user_ID
+            user_ID = event.source.user_id
             google_sheet.update_sheet(
                                         user_ID, 
                                         str(text_entity['food']), 
