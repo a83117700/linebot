@@ -36,7 +36,7 @@ def retrieve(ID, choice):
 			string = ''
 			print(sheet.cell(row_number, 4).value)
 			if((sheet.cell(row_number, 4).value=='喜歡') or (sheet.cell(row_number, 4).value=='愛')):
-				string = like_string+ sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
-		string = like_string.replace('None','')
+				string = string+ sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
+		string = string.replace('None','')
 	return string
 	
