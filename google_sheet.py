@@ -22,7 +22,7 @@ def auth_gss_client(path, scopes):
 
 def insert_sheet(ID, food, like, flavor, size, store):
 	spreadsheet_key = '1B-Ghm54KLT--4qgIfhn3aUfuJlnzEGVnWski_HqJhIA'
-	sheet = authority_sheet
+	sheet = authority_sheet()
 	
 
 	date = time.strftime("%c")
