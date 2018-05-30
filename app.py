@@ -236,7 +236,7 @@ def handle_text_message(event):                  # default
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         else:
             user_ID = event.source.user_id
-            msg = google_sheet.test(user_ID, 'food', text)
+            msg = google_sheet.test(user_ID, 'store', text)
             msg = msg + '\n可繼續輸入踩雷，或輸入Hi可以回到選單喔'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
 
