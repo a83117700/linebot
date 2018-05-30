@@ -145,14 +145,18 @@ def handle_text_message(event):                  # default
             line_bot_api.reply_message(event.reply_token,message)
 
     elif(status == 'test_init'):
-        global status
-        if(text == '踩食物雷'):
+        if(text == '踩雷測試'):
+            break
+        elif(text == '踩食物雷'):
+            global status
             status = 'test_food'
             msg = '請輸入要踩雷的食物名字'
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         else:
+            global status
             status = 'test_store'
             msg = '請輸入要踩雷的店家名字'
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
     elif(status == 'test_food'):
         if(text == 'Hi'):
             global status
@@ -236,17 +240,17 @@ def handle_text_message(event):                  # default
                         text='輸入Hi可以把選單叫出來喔',
                         actions=[
                             PostbackTemplateAction(
-                                label='查詢她的喜好',
+                                label='查詢她的喜好( ￣ 3￣)y▂ξ',
                                 text='查詢她的喜好',
                                 data='retrieve'
                             ),
                             PostbackTemplateAction(
-                                label='紀錄食物喜好',
+                                label='紀錄食物喜好( • ̀ω•́ )',
                                 text='紀錄食物喜好',
                                 data='food'
                             ),
                             PostbackTemplateAction(
-                                label='踩雷測試',
+                                label='踩雷測試(((ﾟдﾟ)))',
                                 text='踩雷測試',
                                 data='test'
                             )
