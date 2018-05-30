@@ -145,20 +145,46 @@ def handle_text_message(event):                  # default
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
-    if event.postback.data == 'food':
+    if( event.postback.data == 'food'):
         global status
         status = 'food'
         msg = '請以一句話詳細的紀錄她喜歡或討厭的食物\n紀錄完請輸入Hi回到選單'
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=msg))
-    elif event.postback.data == 'retrieve':
-        """global status
-                                status = 'retrieve'"""
+    elif( event.postback.data == 'retrieve'):
+        global status
+        status = 'retrieve'
+
+        message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='查哪個呢?',
+                actions=[
+                    PostbackTemplateAction(
+                        label='喜歡',
+                        text='喜歡',
+                        data='like'
+                    ),
+                    PostbackTemplateAction(
+                        label='討厭',
+                        text='討厭',
+                        data='hate'
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, message)
+    elif (event.postback.data =='like'):
         global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.retrieve(user_ID, 'like')
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=msg))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+    elif( event.postback.data =='hate'):
+        global user_ID
+        user_ID = event.source.user_id
+        msg = google_sheet.retrieve(user_ID, 'hate')
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+
     """elif event.postback.data == 'datetime_postback':
                     line_bot_api.reply_message(
                         event.reply_token, TextSendMessage(text=event.postback.params['datetime']))

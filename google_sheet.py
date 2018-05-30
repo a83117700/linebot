@@ -38,7 +38,14 @@ def retrieve(ID, choice):
 			print(sheet.cell(row_number, 4).value)
 			if((sheet.cell(row_number, 4).value=='喜歡') or (sheet.cell(row_number, 4).value=='愛')):
 				string = string+ sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
-		string = string.replace('None','')
-	print(string)
+	elif(choice == 'hate'):
+		string = ''
+		print(all_value)
+		for cells in all_value:
+			row_number = cells.row
+			print(sheet.cell(row_number, 4).value)
+			if((sheet.cell(row_number, 4).value=='討厭') or (sheet.cell(row_number, 4).value=='不喜歡')):
+				string = string+ sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
+	string = string.replace('None','')
 	return string
 	
