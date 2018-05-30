@@ -292,11 +292,13 @@ def handle_postback(event):
         global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.retrieve(user_ID, 'like')
+        msg = msg + '輸入Hi可以回到選單喔'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
     elif( event.postback.data =='hate'):
         global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.retrieve(user_ID, 'hate')
+        msg = msg + '輸入Hi可以回到選單喔'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
     
     elif(event.postback.data =='test'):
