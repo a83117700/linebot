@@ -154,10 +154,9 @@ def handle_postback(event):
     elif event.postback.data == 'retrieve':
         """global status
                                 status = 'retrieve'"""
-        msg = '她的喜好是...'
         global user_ID
         user_ID = event.source.user_id
-        google_sheet.retrieve(user_ID, 'like')
+        msg = google_sheet.retrieve(user_ID, 'like')
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=msg))
     """elif event.postback.data == 'datetime_postback':
