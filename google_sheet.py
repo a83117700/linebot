@@ -28,7 +28,7 @@ def insert_sheet(ID, food, like, flavor, size, store):
 	sheet.insert_row([date, ID, food, like, flavor, size, store], 2)
 
 def retrieve(ID, choice):
-	if(choice == 'like')
+	if(choice == 'like'):
 		sheet = authority_sheet()
 		all_value = sheet.find_all(ID)
 		print(all_value)
