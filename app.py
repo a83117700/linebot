@@ -94,8 +94,8 @@ def handle_text_message(event):                  # default
             msg = TemplateSendMessage(
                     alt_text='Buttons template',
                     template=ButtonsTemplate(
-                        thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
-                        title='Σ>―(〃°ω°〃)♡→',
+                        thumbnail_image_url='https://i.imgur.com/YfbMZgx.jpg',
+                        title='    Σ>―(〃°ω°〃)♡→',
                         text='輸入Hi可以把選單叫出來喔',
                         actions=[
                             PostbackTemplateAction(
@@ -161,7 +161,7 @@ def handle_text_message(event):                  # default
                     alt_text='Buttons template',
                     template=ButtonsTemplate(
                         thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
-                        title='Σ>―(〃°ω°〃)♡→',
+                        title='    Σ>―(〃°ω°〃)♡→',
                         text='輸入Hi可以把選單叫出來喔',
                         actions=[
                             PostbackTemplateAction(
@@ -196,7 +196,7 @@ def handle_text_message(event):                  # default
                     alt_text='Buttons template',
                     template=ButtonsTemplate(
                         thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
-                        title='Σ>―(〃°ω°〃)♡→',
+                        title='    Σ>―(〃°ω°〃)♡→',
                         text='輸入Hi可以把選單叫出來喔',
                         actions=[
                             PostbackTemplateAction(
@@ -232,7 +232,7 @@ def handle_text_message(event):                  # default
                     alt_text='Buttons template',
                     template=ButtonsTemplate(
                         thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
-                        title='Menu',
+                        title='    Σ>―(〃°ω°〃)♡→',
                         text='輸入Hi可以把選單叫出來喔',
                         actions=[
                             PostbackTemplateAction(
