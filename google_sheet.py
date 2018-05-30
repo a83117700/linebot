@@ -31,7 +31,7 @@ def retrieve(ID, choice):
 	sheet = authority_sheet()
 	all_value = sheet.findall(ID)
 	if(choice == 'like'):
-		for cells in range(all_value):
+		for cells in range(len(all_value)):
 			row_number = cells.row
 			like_string = ''
 			print(worksheet.cell(row_number, 4))
