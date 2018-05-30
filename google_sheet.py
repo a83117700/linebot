@@ -28,8 +28,15 @@ def insert_sheet(ID, food, like, flavor, size, store):
 	sheet.insert_row([date, ID, food, like, flavor, size, store], 2)
 
 def retrieve(ID, choice):
+	sheet = authority_sheet()
+	all_value = sheet.findall(ID)
 	if(choice == 'like'):
-		sheet = authority_sheet()
-		all_value = sheet.findall(ID)
-		print(all_value)
+		for cells in range(all_value):
+			row_number = cells.row
+			like_string = ''
+			print(worksheet.cell(row_number, 4))
+			if((worksheet.cell(row_number, 4)=='喜歡') or (worksheet.cell(row_number, 4)=='愛')):
+				like_string = like_string+ worksheet.cell(row_number, 7) + worksheet.cell(row_number, 6) +worksheet.cell(row_number, 5) + worksheet.cell(row_number, 3) +'\n'
+			print(like_string)
+		#print(all_value)
 	
