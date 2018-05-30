@@ -299,7 +299,7 @@ def handle_postback(event):
     
     elif(event.postback.data =='test'):
         global status
-        status = 'test'
+        status = 'test_init'
         msg = TemplateSendMessage(
             alt_text='Confirm template',
             template=ConfirmTemplate(
