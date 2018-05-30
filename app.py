@@ -195,7 +195,7 @@ def handle_text_message(event):                  # default
         else:
             user_ID = event.source.user_id
             msg = google_sheet.test(user_ID, 'food', text)
-            msg = msg + '輸入Hi可以回到選單喔'
+            msg = msg + '\n輸入Hi可以回到選單喔'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
     elif(status == 'test_store'):
         if(text == 'Hi'):
@@ -235,7 +235,7 @@ def handle_text_message(event):                  # default
         else:
             user_ID = event.source.user_id
             msg = google_sheet.test(user_ID, 'store', text)
-            msg = msg + '輸入Hi可以回到選單喔'
+            msg = msg + '\n輸入Hi可以回到選單喔'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
 
     else:
