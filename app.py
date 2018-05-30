@@ -125,7 +125,7 @@ def handle_text_message(event):                  # default
             #try:
             global user_ID
             user_ID = event.source.user_id
-            google_sheet.update_sheet(
+            google_sheet.insert_sheet(
                                         user_ID, 
                                         str(text_entity['food']), 
                                         str(text_entity['like']), 
