@@ -146,7 +146,7 @@ def handle_text_message(event):                  # default
 
     elif(status == 'test_init'):
         if(text == '踩雷測試'):
-            break
+            pass
         elif(text == '踩食物雷'):
             global status
             status = 'test_food'
