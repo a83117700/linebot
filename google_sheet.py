@@ -34,9 +34,9 @@ def retrieve(ID, choice):
 		for cells in all_value:
 			row_number = cells.row
 			like_string = ''
-			print(worksheet.cell(row_number, 4))
-			if((worksheet.cell(row_number, 4)=='喜歡') or (worksheet.cell(row_number, 4)=='愛')):
-				like_string = like_string+ worksheet.cell(row_number, 7) + worksheet.cell(row_number, 6) +worksheet.cell(row_number, 5) + worksheet.cell(row_number, 3) +'\n'
+			print(sheet.cell(row_number, 4))
+			if((sheet.cell(row_number, 4)=='喜歡') or (sheet.cell(row_number, 4)=='愛')):
+				like_string = like_string+ sheet.cell(row_number, 7) + sheet.cell(row_number, 6) +sheet.cell(row_number, 5) + sheet.cell(row_number, 3) +'\n'
 			print(like_string)
 		#print(all_value)
 	
