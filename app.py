@@ -98,9 +98,9 @@ def handle_text_message(event):                  # default
                         text='Please select',
                         actions=[
                             PostbackTemplateAction(
-                                label='功能維修中',
-                                text='我手賤想點',
-                                data='no'
+                                label='查詢她的喜好',
+                                text='查詢她的喜好',
+                                data='retrieve'
                             ),
                             PostbackTemplateAction(
                                 label='紀錄食物喜好',
@@ -149,6 +149,13 @@ def handle_postback(event):
         global status
         status = 'food'
         msg = '請以一句話詳細的紀錄她喜歡或討厭的食物\n紀錄完請輸入Hi回到選單'
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=msg))
+    elif event.postback.data == 'retrieve':
+        """global status
+                                status = 'retrieve'"""
+        msg = '她的喜好是...'
+        google_sheet.retrieve()
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=msg))
     """elif event.postback.data == 'datetime_postback':
