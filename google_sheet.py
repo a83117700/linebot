@@ -31,12 +31,14 @@ def retrieve(ID, choice):
 	sheet = authority_sheet()
 	all_value = sheet.findall(ID)
 	if(choice == 'like'):
+		string = ''
+		print(all_value)
 		for cells in all_value:
 			row_number = cells.row
-			string = ''
 			print(sheet.cell(row_number, 4).value)
 			if((sheet.cell(row_number, 4).value=='喜歡') or (sheet.cell(row_number, 4).value=='愛')):
 				string = string+ sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
 		string = string.replace('None','')
+	print(string)
 	return string
 	
