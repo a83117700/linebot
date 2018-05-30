@@ -9,6 +9,7 @@ import time
 
 auth_json_path = 'sweet-man-d9c2b8272f1f.json'
 gss_scopes = ['https://spreadsheets.google.com/feeds']
+spreadsheet_key = '1B-Ghm54KLT--4qgIfhn3aUfuJlnzEGVnWski_HqJhIA'
 
 def authority_sheet():
 	gss_client = auth_gss_client(auth_json_path, gss_scopes)
@@ -21,9 +22,7 @@ def auth_gss_client(path, scopes):
     return gspread.authorize(credentials)
 
 def insert_sheet(ID, food, like, flavor, size, store):
-	spreadsheet_key = '1B-Ghm54KLT--4qgIfhn3aUfuJlnzEGVnWski_HqJhIA'
-	sheet = authority_sheet()
-	
+	sheet = authority_sheet()	
 
 	date = time.strftime("%c")
 	sheet.insert_row([date, ID, food, like, flavor, size, store], 2)
