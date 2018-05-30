@@ -148,18 +148,15 @@ def handle_text_message(event):                  # default
         if(text == '踩雷測試'):
             pass
         elif(text == '踩食物雷'):
-            global status
             status = 'test_food'
             msg = '請輸入要踩雷的食物名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         else:
-            global status
             status = 'test_store'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
     elif(status == 'test_food'):
         if(text == 'Hi'):
-            global status
             status = 'init'
             msg = TemplateSendMessage(
                     alt_text='Buttons template',
@@ -188,12 +185,10 @@ def handle_text_message(event):                  # default
                 )
             line_bot_api.reply_message(event.reply_token,msg)
         elif(text == '踩店家雷'):
-            global status
             status = 'test_store'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         elif(text == '踩食物雷'):
-            global status
             status = 'test_food'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
@@ -204,7 +199,6 @@ def handle_text_message(event):                  # default
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
     elif(status == 'test_store'):
         if(text == 'Hi'):
-            global status
             status = 'init'
             msg = TemplateSendMessage(
                     alt_text='Buttons template',
@@ -233,12 +227,10 @@ def handle_text_message(event):                  # default
                 )
             line_bot_api.reply_message(event.reply_token,msg)
         elif(text == '踩食物雷'):
-            global status
             status = 'test_food'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         elif(text == '踩店家雷'):
-            global status
             status = 'test_store'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
