@@ -61,21 +61,21 @@ def handle_text_message(event):                  # default
                     alt_text='Buttons template',
                     template=ButtonsTemplate(
                         thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
-                        title='Menu',
+                        title='Σ>―(〃°ω°〃)♡→',
                         text='輸入Hi可以把選單叫出來喔',
                         actions=[
                             PostbackTemplateAction(
-                                label='查詢她的喜好',
+                                label='查詢她的喜好( ￣ 3￣)y▂ξ',
                                 text='查詢她的喜好',
                                 data='retrieve'
                             ),
                             PostbackTemplateAction(
-                                label='紀錄食物喜好',
+                                label='紀錄食物喜好( • ̀ω•́ )',
                                 text='紀錄食物喜好',
                                 data='food'
                             ),
                             PostbackTemplateAction(
-                                label='踩雷測試',
+                                label='踩雷測試(((ﾟдﾟ)))',
                                 text='踩雷測試',
                                 data='test'
                             )
@@ -95,21 +95,21 @@ def handle_text_message(event):                  # default
                     alt_text='Buttons template',
                     template=ButtonsTemplate(
                         thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
-                        title='Menu',
+                        title='Σ>―(〃°ω°〃)♡→',
                         text='輸入Hi可以把選單叫出來喔',
                         actions=[
                             PostbackTemplateAction(
-                                label='查詢她的喜好',
+                                label='查詢她的喜好( ￣ 3￣)y▂ξ',
                                 text='查詢她的喜好',
                                 data='retrieve'
                             ),
                             PostbackTemplateAction(
-                                label='紀錄食物喜好',
+                                label='紀錄食物喜好( • ̀ω•́ )',
                                 text='紀錄食物喜好',
                                 data='food'
                             ),
                             PostbackTemplateAction(
-                                label='踩雷測試',
+                                label='踩雷測試(((ﾟдﾟ)))',
                                 text='踩雷測試',
                                 data='test'
                             )
@@ -161,21 +161,21 @@ def handle_text_message(event):                  # default
                     alt_text='Buttons template',
                     template=ButtonsTemplate(
                         thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
-                        title='Menu',
+                        title='Σ>―(〃°ω°〃)♡→',
                         text='輸入Hi可以把選單叫出來喔',
                         actions=[
                             PostbackTemplateAction(
-                                label='查詢她的喜好',
+                                label='查詢她的喜好( ￣ 3￣)y▂ξ',
                                 text='查詢她的喜好',
                                 data='retrieve'
                             ),
                             PostbackTemplateAction(
-                                label='紀錄食物喜好',
+                                label='紀錄食物喜好( • ̀ω•́ )',
                                 text='紀錄食物喜好',
                                 data='food'
                             ),
                             PostbackTemplateAction(
-                                label='踩雷測試',
+                                label='踩雷測試(((ﾟдﾟ)))',
                                 text='踩雷測試',
                                 data='test'
                             )
@@ -186,6 +186,7 @@ def handle_text_message(event):                  # default
         else:
             user_ID = event.source.user_id
             msg = google_sheet.test(user_ID, 'food', text)
+            msg = msg + '輸入Hi可以回到選單喔'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
     elif(status == 'test_store'):
         if(text == 'Hi'):
@@ -195,21 +196,21 @@ def handle_text_message(event):                  # default
                     alt_text='Buttons template',
                     template=ButtonsTemplate(
                         thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
-                        title='Menu',
+                        title='Σ>―(〃°ω°〃)♡→',
                         text='輸入Hi可以把選單叫出來喔',
                         actions=[
                             PostbackTemplateAction(
-                                label='查詢她的喜好',
+                                label='查詢她的喜好( ￣ 3￣)y▂ξ',
                                 text='查詢她的喜好',
                                 data='retrieve'
                             ),
                             PostbackTemplateAction(
-                                label='紀錄食物喜好',
+                                label='紀錄食物喜好( • ̀ω•́ )',
                                 text='紀錄食物喜好',
                                 data='food'
                             ),
                             PostbackTemplateAction(
-                                label='踩雷測試',
+                                label='踩雷測試(((ﾟдﾟ)))',
                                 text='踩雷測試',
                                 data='test'
                             )
@@ -220,6 +221,7 @@ def handle_text_message(event):                  # default
         else:
             user_ID = event.source.user_id
             msg = google_sheet.test(user_ID, 'store', text)
+            msg = msg + '輸入Hi可以回到選單喔'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
 
     else:
@@ -273,12 +275,12 @@ def handle_postback(event):
                 text='查哪種呢?',
                 actions=[
                     PostbackTemplateAction(
-                        label='喜歡',
+                        label='喜歡d(`･∀･)b',
                         text='喜歡',
                         data='like'
                     ),
                     PostbackTemplateAction(
-                        label='討厭',
+                        label='討厭(´;ω;`)',
                         text='討厭',
                         data='hate'
                     )
