@@ -187,6 +187,11 @@ def handle_text_message(event):                  # default
                     )
                 )
             line_bot_api.reply_message(event.reply_token,msg)
+        elif(text == '踩店家雷'):
+            global status
+            status = 'test_store'
+            msg = '請輸入要踩雷的店家名字'
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         else:
             user_ID = event.source.user_id
             msg = google_sheet.test(user_ID, 'food', text)
@@ -222,6 +227,11 @@ def handle_text_message(event):                  # default
                     )
                 )
             line_bot_api.reply_message(event.reply_token,msg)
+        elif(text == '踩食物雷'):
+            global status
+            status = 'test_food'
+            msg = '請輸入要踩雷的店家名字'
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         else:
             user_ID = event.source.user_id
             msg = google_sheet.test(user_ID, 'store', text)
