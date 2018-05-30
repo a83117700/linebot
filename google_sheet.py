@@ -62,7 +62,7 @@ def test(ID, choice, name):
 			for cells in all_value:
 					row_number = cells.row
 					print(sheet.cell(row_number, 3).value)
-					if((sheet.cell(row_number, 3).value==name):
+					if(sheet.cell(row_number, 3).value==name):
 						string = string + sheet.cell(row_number, 4).value + ': ' + sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
 		except:
 			pass
@@ -72,7 +72,7 @@ def test(ID, choice, name):
 			for cells in all_value:
 					row_number = cells.row
 					print(sheet.cell(row_number, 7).value)
-					if((sheet.cell(row_number, 7).value==name):
+					if(sheet.cell(row_number, 7).value==name):
 						string = string + sheet.cell(row_number, 4).value + ': ' + sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
 		except:
 			pass
