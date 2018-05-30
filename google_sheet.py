@@ -32,20 +32,52 @@ def retrieve(ID, choice):
 	all_value = sheet.findall(ID)
 	if(choice == 'like'):
 		string = ''
-		print(all_value)
-		for cells in all_value:
-			row_number = cells.row
-			print(sheet.cell(row_number, 4).value)
-			if((sheet.cell(row_number, 4).value=='喜歡') or (sheet.cell(row_number, 4).value=='愛')):
-				string = string+ sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
+		try:
+			for cells in all_value:
+				row_number = cells.row
+				if((sheet.cell(row_number, 4).value=='喜歡') or (sheet.cell(row_number, 4).value=='愛')):
+					string = string+ sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
+		except:
+			pass	
 	elif(choice == 'hate'):
 		string = ''
-		print(all_value)
-		for cells in all_value:
-			row_number = cells.row
-			print(sheet.cell(row_number, 4).value)
-			if((sheet.cell(row_number, 4).value=='討厭') or (sheet.cell(row_number, 4).value=='不喜歡')):
-				string = string+ sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
+		try:
+			for cells in all_value:
+				row_number = cells.row
+				if((sheet.cell(row_number, 4).value=='討厭') or (sheet.cell(row_number, 4).value=='不喜歡')):
+					string = string+ sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
+		except:
+			pass
 	string = string.replace('None','')
+	if(len(string)<1):
+		string = '查無資料喔，愛她就認真記阿(#`Д´)ﾉ'
 	return string
-	
+
+def test(ID, choice, name):
+	sheet = authority_sheet()
+	all_value = sheet.findall(ID)
+	if(choice == 'food'):
+		string = ''
+		try:
+			for cells in all_value:
+					row_number = cells.row
+					print(sheet.cell(row_number, 3).value)
+					if((sheet.cell(row_number, 3).value==name):
+						string = string + sheet.cell(row_number, 4).value + ': ' + sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
+		except:
+			pass
+	elif(choice == 'store'):
+		string = ''
+		try:
+			for cells in all_value:
+					row_number = cells.row
+					print(sheet.cell(row_number, 7).value)
+					if((sheet.cell(row_number, 7).value==name):
+						string = string + sheet.cell(row_number, 4).value + ': ' + sheet.cell(row_number, 7).value + sheet.cell(row_number, 6).value +sheet.cell(row_number, 5).value + sheet.cell(row_number, 3).value +'\n'
+		except:
+			pass
+	string = string.replace('None','')
+	if(len(string)<1):
+		string = '查無資料喔，愛她就認真記阿(#`Д´)ﾉ'
+	return string
+

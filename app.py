@@ -62,7 +62,7 @@ def handle_text_message(event):                  # default
                     template=ButtonsTemplate(
                         thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
                         title='Menu',
-                        text='Please select',
+                        text='輸入Hi可以把選單叫出來喔',
                         actions=[
                             PostbackTemplateAction(
                                 label='查詢她的喜好',
@@ -74,9 +74,10 @@ def handle_text_message(event):                  # default
                                 text='紀錄食物喜好',
                                 data='food'
                             ),
-                            URITemplateAction(
-                                label='偷看帥哥FB',
-                                uri='https://www.facebook.com/'
+                            PostbackTemplateAction(
+                                label='踩雷測試',
+                                text='踩雷測試',
+                                data='test'
                             )
                         ]
                     )
@@ -95,7 +96,7 @@ def handle_text_message(event):                  # default
                     template=ButtonsTemplate(
                         thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
                         title='Menu',
-                        text='Please select',
+                        text='輸入Hi可以把選單叫出來喔',
                         actions=[
                             PostbackTemplateAction(
                                 label='查詢她的喜好',
@@ -107,9 +108,10 @@ def handle_text_message(event):                  # default
                                 text='紀錄食物喜好',
                                 data='food'
                             ),
-                            URITemplateAction(
-                                label='偷看帥哥FB',
-                                uri='https://www.facebook.com/'
+                            PostbackTemplateAction(
+                                label='踩雷測試',
+                                text='踩雷測試',
+                                data='test'
                             )
                         ]
                     )
@@ -142,6 +144,116 @@ def handle_text_message(event):                  # default
             message = TextSendMessage(text = msg)
             line_bot_api.reply_message(event.reply_token,message)
 
+    elif(status == 'test_init'):
+        global status
+        if(text == '踩食物雷'):
+            status = 'test_food'
+            msg = '請輸入要踩雷的食物名字'
+        else:
+            status = 'test_store'
+            msg = '請輸入要踩雷的店家名字'
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+    elif(status == 'test_food'):
+        if(text == 'Hi'):
+            global status
+            status = 'init'
+            msg = TemplateSendMessage(
+                    alt_text='Buttons template',
+                    template=ButtonsTemplate(
+                        thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
+                        title='Menu',
+                        text='輸入Hi可以把選單叫出來喔',
+                        actions=[
+                            PostbackTemplateAction(
+                                label='查詢她的喜好',
+                                text='查詢她的喜好',
+                                data='retrieve'
+                            ),
+                            PostbackTemplateAction(
+                                label='紀錄食物喜好',
+                                text='紀錄食物喜好',
+                                data='food'
+                            ),
+                            PostbackTemplateAction(
+                                label='踩雷測試',
+                                text='踩雷測試',
+                                data='test'
+                            )
+                        ]
+                    )
+                )
+            line_bot_api.reply_message(event.reply_token,msg)
+        else:
+            user_ID = event.source.user_id
+            msg = google_sheet.test(user_ID, 'food', text)
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+    elif(status == 'test_store'):
+        if(text == 'Hi'):
+            global status
+            status = 'init'
+            msg = TemplateSendMessage(
+                    alt_text='Buttons template',
+                    template=ButtonsTemplate(
+                        thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
+                        title='Menu',
+                        text='輸入Hi可以把選單叫出來喔',
+                        actions=[
+                            PostbackTemplateAction(
+                                label='查詢她的喜好',
+                                text='查詢她的喜好',
+                                data='retrieve'
+                            ),
+                            PostbackTemplateAction(
+                                label='紀錄食物喜好',
+                                text='紀錄食物喜好',
+                                data='food'
+                            ),
+                            PostbackTemplateAction(
+                                label='踩雷測試',
+                                text='踩雷測試',
+                                data='test'
+                            )
+                        ]
+                    )
+                )
+            line_bot_api.reply_message(event.reply_token,msg)
+        else:
+            user_ID = event.source.user_id
+            msg = google_sheet.test(user_ID, 'store', text)
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+
+    else:
+        if(text == 'Hi'):
+            global status
+            status = 'init'
+            msg = TemplateSendMessage(
+                    alt_text='Buttons template',
+                    template=ButtonsTemplate(
+                        thumbnail_image_url='https://i.imgur.com/1z9Uxdg.jpg',
+                        title='Menu',
+                        text='輸入Hi可以把選單叫出來喔',
+                        actions=[
+                            PostbackTemplateAction(
+                                label='查詢她的喜好',
+                                text='查詢她的喜好',
+                                data='retrieve'
+                            ),
+                            PostbackTemplateAction(
+                                label='紀錄食物喜好',
+                                text='紀錄食物喜好',
+                                data='food'
+                            ),
+                            PostbackTemplateAction(
+                                label='踩雷測試',
+                                text='踩雷測試',
+                                data='test'
+                            )
+                        ]
+                    )
+                )
+            line_bot_api.reply_message(event.reply_token,msg)
+
+
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
@@ -151,14 +263,14 @@ def handle_postback(event):
         msg = '請以一句話詳細的紀錄她喜歡或討厭的食物\n紀錄完請輸入Hi回到選單'
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=msg))
+    
     elif( event.postback.data == 'retrieve'):
         global status
         status = 'retrieve'
-
         message = TemplateSendMessage(
             alt_text='Confirm template',
             template=ConfirmTemplate(
-                text='查哪個呢?',
+                text='查哪種呢?',
                 actions=[
                     PostbackTemplateAction(
                         label='喜歡',
@@ -184,6 +296,38 @@ def handle_postback(event):
         user_ID = event.source.user_id
         msg = google_sheet.retrieve(user_ID, 'hate')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+    
+    elif(event.postback.data =='test'):
+        global status
+        status = 'test'
+        message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='踩哪個雷呢(*´∀`)~♥',
+                actions=[
+                    MessageTemplateAction(
+                        label='踩食物雷',
+                        text='踩食物雷',
+                    ),
+                    MessageTemplateAction(
+                        label='踩店家雷',
+                        text='踩店家雷',
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token,msg)
+    elif( event.postback.data =='test_food'):
+        global user_ID
+        user_ID = event.source.user_id
+        msg = google_sheet.test(user_ID, 'food')
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+    elif( event.postback.data =='test_store'):
+        global user_ID
+        user_ID = event.source.user_id
+        msg = google_sheet.test(user_ID, 'store')
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+
 
     """elif event.postback.data == 'datetime_postback':
                     line_bot_api.reply_message(
