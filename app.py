@@ -65,9 +65,9 @@ def handle_text_message(event):                  # default
                         text='Please select',
                         actions=[
                             PostbackTemplateAction(
-                                label='功能維修中',
-                                text='我手賤想點',
-                                data='no'
+                                label='查詢她的喜好',
+                                text='查詢她的喜好',
+                                data='retrieve'
                             ),
                             PostbackTemplateAction(
                                 label='紀錄食物喜好',

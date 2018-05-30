@@ -30,6 +30,6 @@ def insert_sheet(ID, food, like, flavor, size, store):
 def retrieve(ID, choice):
 	if(choice == 'like'):
 		sheet = authority_sheet()
-		all_value = sheet.find_all(ID)
+		all_value = sheet.findall(ID)
 		print(all_value)
 	
