@@ -192,10 +192,15 @@ def handle_text_message(event):                  # default
             status = 'test_store'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+        elif(text == '踩食物雷'):
+            global status
+            status = 'test_food'
+            msg = '請輸入要踩雷的店家名字'
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         else:
             user_ID = event.source.user_id
             msg = google_sheet.test(user_ID, 'food', text)
-            msg = msg + '\n輸入Hi可以回到選單喔'
+            msg = msg + '\n可繼續輸入踩雷，或輸入Hi可以回到選單喔'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
     elif(status == 'test_store'):
         if(text == 'Hi'):
@@ -232,10 +237,15 @@ def handle_text_message(event):                  # default
             status = 'test_food'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+        elif(text == '踩店家雷'):
+            global status
+            status = 'test_store'
+            msg = '請輸入要踩雷的店家名字'
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         else:
             user_ID = event.source.user_id
-            msg = google_sheet.test(user_ID, 'store', text)
-            msg = msg + '\n輸入Hi可以回到選單喔'
+            msg = google_sheet.test(user_ID, 'food', text)
+            msg = msg + '\n可繼續輸入踩雷，或輸入Hi可以回到選單喔'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
 
     else:
