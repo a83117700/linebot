@@ -23,6 +23,7 @@ line_bot_api = LineBotApi('Hr4G/v9C8g+GDrUeyBN0t0u9WlqjxBsUOuRJquRl7mOd/QVOzC5ac
 global status 
 status = 'init'
 global user_ID
+user_ID = event.source.user_id
 
 
 @app.route('/')
@@ -83,9 +84,11 @@ def handle_text_message(event):                  # default
                     )
                 )
             line_bot_api.reply_message(event.reply_token,message)
+            google_sheet_log.record_log(user_ID, 'init', 'hi', text)
         else:
             message = TextSendMessage(text = text)
             line_bot_api.reply_message(event.reply_token,message)
+            google_sheet_log.record_log(user_ID, 'init', 'else', text)
     elif(status == 'food'):
         text_entity = Luis_handler.luis(text)
         if(text == 'Hi'):
@@ -117,12 +120,15 @@ def handle_text_message(event):                  # default
                     )
                 )
             line_bot_api.reply_message(event.reply_token,msg)
+            google_sheet_log.record_log(user_ID, 'food', 'hi', text)
         elif(text == '紀錄食物喜好'):
+            google_sheet_log.record_log(user_ID, 'food', 'press_record', text)
             pass
         elif(type(text_entity) is str):
             msg = text_entity+'\n若已紀錄完請輸入Hi回到選單'
             message = TextSendMessage(text = msg)
             line_bot_api.reply_message(event.reply_token,message)
+            google_sheet_log.record_log(user_ID, 'food', 'record_failed', text)
         else:
             #try:
             global user_ID
@@ -143,18 +149,22 @@ def handle_text_message(event):                  # default
             msg = msg.replace('None','')
             message = TextSendMessage(text = msg)
             line_bot_api.reply_message(event.reply_token,message)
+            google_sheet_log.record_log(user_ID, 'food', 'record', text)
 
     elif(status == 'test_init'):
         if(text == '踩雷測試'):
+            google_sheet_log.record_log(user_ID, 'test_init', 'press_test', text)
             pass
         elif(text == '踩食物雷'):
             status = 'test_food'
             msg = '請輸入要踩雷的食物名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+            google_sheet_log.record_log(user_ID, 'test_init', 'press_test_food', text)
         else:
             status = 'test_store'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+            google_sheet_log.record_log(user_ID, 'test_init', 'press_test_store', text)
     elif(status == 'test_food'):
         if(text == 'Hi'):
             status = 'init'
@@ -184,19 +194,23 @@ def handle_text_message(event):                  # default
                     )
                 )
             line_bot_api.reply_message(event.reply_token,msg)
+            google_sheet_log.record_log(user_ID, 'test_food', 'hi', text)
         elif(text == '踩店家雷'):
             status = 'test_store'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+            google_sheet_log.record_log(user_ID, 'test_food', 'press_test_store', text)
         elif(text == '踩食物雷'):
             status = 'test_food'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+            google_sheet_log.record_log(user_ID, 'test_init', 'press_test_food', text)
         else:
             user_ID = event.source.user_id
             msg = google_sheet.test(user_ID, 'food', text)
             msg = msg + '\n可繼續輸入踩雷，或輸入Hi可以回到選單喔'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+            google_sheet_log.record_log(user_ID, 'test_food', 'test_food', text)
     elif(status == 'test_store'):
         if(text == 'Hi'):
             status = 'init'
@@ -226,22 +240,27 @@ def handle_text_message(event):                  # default
                     )
                 )
             line_bot_api.reply_message(event.reply_token,msg)
+            google_sheet_log.record_log(user_ID, 'test_store', 'hi', text)
         elif(text == '踩食物雷'):
             status = 'test_food'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+            google_sheet_log.record_log(user_ID, 'test_store', 'press_test_food', text)
         elif(text == '踩店家雷'):
             status = 'test_store'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+            google_sheet_log.record_log(user_ID, 'test_init', 'press_test_store', text)
         else:
             user_ID = event.source.user_id
             msg = google_sheet.test(user_ID, 'store', text)
             msg = msg + '\n可繼續輸入踩雷，或輸入Hi可以回到選單喔'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+            google_sheet_log.record_log(user_ID, 'test_store', 'test_store', text)
 
     else:
         if(text == 'Hi'):
+            google_sheet_log.record_log(user_ID, 'unknow', 'hi', text)
             global status
             status = 'init'
             msg = TemplateSendMessage(
@@ -270,6 +289,7 @@ def handle_text_message(event):                  # default
                     )
                 )
             line_bot_api.reply_message(event.reply_token,msg)
+
 
 
 
@@ -304,18 +324,21 @@ def handle_postback(event):
             )
         )
         line_bot_api.reply_message(event.reply_token, message)
+        google_sheet_log.record_log(user_ID, 'retrieve', 'press_retrieve', text)
     elif (event.postback.data =='like'):
         global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.retrieve(user_ID, 'like')
         msg = msg + '輸入Hi可以回到選單喔'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+        google_sheet_log.record_log(user_ID, 'retrieve', 'press_like', text)
     elif( event.postback.data =='hate'):
         global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.retrieve(user_ID, 'hate')
         msg = msg + '輸入Hi可以回到選單喔'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+        google_sheet_log.record_log(user_ID, 'retrieve', 'press_hate', text)
     
     elif(event.postback.data =='test'):
         global status
@@ -337,16 +360,19 @@ def handle_postback(event):
             )
         )
         line_bot_api.reply_message(event.reply_token,msg)
+        google_sheet_log.record_log(user_ID, 'test_init', 'press_test', text)
     elif( event.postback.data =='test_food'):
         global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.test(user_ID, 'food')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+        google_sheet_log.record_log(user_ID, 'test_food', 'test_food', text)
     elif( event.postback.data =='test_store'):
         global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.test(user_ID, 'store')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
+        google_sheet_log.record_log(user_ID, 'test_store', 'test_store', text)
 
 
     """elif event.postback.data == 'datetime_postback':
