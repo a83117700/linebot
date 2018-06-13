@@ -93,6 +93,7 @@ def handle_text_message(event):                  # default
     elif(status == 'food'):
         text_entity = Luis_handler.luis(text)
         if(text == 'Hi'):
+            global status
             status = 'init'
             msg = TemplateSendMessage(
                     alt_text='Buttons template',
@@ -131,6 +132,7 @@ def handle_text_message(event):                  # default
             google_sheet_log.record_log(user_ID, 'food', 'record_failed', text)
         else:
             #try:
+            global user_ID
             user_ID = event.source.user_id
             google_sheet.insert_sheet(
                                         user_ID, 
@@ -155,17 +157,20 @@ def handle_text_message(event):                  # default
             google_sheet_log.record_log(user_ID, 'test_init', 'press_test', text)
             pass
         elif(text == '踩食物雷'):
+            global status
             status = 'test_food'
             msg = '請輸入要踩雷的食物名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
             google_sheet_log.record_log(user_ID, 'test_init', 'press_test_food', text)
         else:
+            global status
             status = 'test_store'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
             google_sheet_log.record_log(user_ID, 'test_init', 'press_test_store', text)
     elif(status == 'test_food'):
         if(text == 'Hi'):
+            global status
             status = 'init'
             msg = TemplateSendMessage(
                     alt_text='Buttons template',
@@ -195,16 +200,19 @@ def handle_text_message(event):                  # default
             line_bot_api.reply_message(event.reply_token,msg)
             google_sheet_log.record_log(user_ID, 'test_food', 'hi', text)
         elif(text == '踩店家雷'):
+            global status
             status = 'test_store'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
             google_sheet_log.record_log(user_ID, 'test_food', 'press_test_store', text)
         elif(text == '踩食物雷'):
+            global status
             status = 'test_food'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
             google_sheet_log.record_log(user_ID, 'test_init', 'press_test_food', text)
         else:
+            global user_ID
             user_ID = event.source.user_id
             msg = google_sheet.test(user_ID, 'food', text)
             msg = msg + '\n可繼續輸入踩雷，或輸入Hi可以回到選單喔'
@@ -212,6 +220,7 @@ def handle_text_message(event):                  # default
             google_sheet_log.record_log(user_ID, 'test_food', 'test_food', text)
     elif(status == 'test_store'):
         if(text == 'Hi'):
+            global status
             status = 'init'
             msg = TemplateSendMessage(
                     alt_text='Buttons template',
@@ -241,16 +250,19 @@ def handle_text_message(event):                  # default
             line_bot_api.reply_message(event.reply_token,msg)
             google_sheet_log.record_log(user_ID, 'test_store', 'hi', text)
         elif(text == '踩食物雷'):
+            global status
             status = 'test_food'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
             google_sheet_log.record_log(user_ID, 'test_store', 'press_test_food', text)
         elif(text == '踩店家雷'):
+            global status
             status = 'test_store'
             msg = '請輸入要踩雷的店家名字'
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
             google_sheet_log.record_log(user_ID, 'test_init', 'press_test_store', text)
         else:
+            global user_ID
             user_ID = event.source.user_id
             msg = google_sheet.test(user_ID, 'store', text)
             msg = msg + '\n可繼續輸入踩雷，或輸入Hi可以回到選單喔'
@@ -260,6 +272,7 @@ def handle_text_message(event):                  # default
     else:
         if(text == 'Hi'):
             google_sheet_log.record_log(user_ID, 'unknow', 'hi', text)
+            global status
             status = 'init'
             msg = TemplateSendMessage(
                     alt_text='Buttons template',
@@ -294,12 +307,14 @@ def handle_text_message(event):                  # default
 @handler.add(PostbackEvent)
 def handle_postback(event):
     if( event.postback.data == 'food'):
+        global status
         status = 'food'
         msg = '請以一句話詳細的紀錄她喜歡或討厭的食物\n紀錄完請輸入Hi回到選單'
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=msg))
     
     elif( event.postback.data == 'retrieve'):
+        global status
         status = 'retrieve'
         message = TemplateSendMessage(
             alt_text='Confirm template',
@@ -322,12 +337,14 @@ def handle_postback(event):
         line_bot_api.reply_message(event.reply_token, message)
         google_sheet_log.record_log(user_ID, 'retrieve', 'press_retrieve', text)
     elif (event.postback.data =='like'):
+        global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.retrieve(user_ID, 'like')
         msg = msg + '輸入Hi可以回到選單喔'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         google_sheet_log.record_log(user_ID, 'retrieve', 'press_like', text)
     elif( event.postback.data =='hate'):
+        global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.retrieve(user_ID, 'hate')
         msg = msg + '輸入Hi可以回到選單喔'
@@ -335,6 +352,7 @@ def handle_postback(event):
         google_sheet_log.record_log(user_ID, 'retrieve', 'press_hate', text)
     
     elif(event.postback.data =='test'):
+        global status
         status = 'test_init'
         msg = TemplateSendMessage(
             alt_text='Confirm template',
@@ -355,11 +373,13 @@ def handle_postback(event):
         line_bot_api.reply_message(event.reply_token,msg)
         google_sheet_log.record_log(user_ID, 'test_init', 'press_test', text)
     elif( event.postback.data =='test_food'):
+        global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.test(user_ID, 'food')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         google_sheet_log.record_log(user_ID, 'test_food', 'test_food', text)
     elif( event.postback.data =='test_store'):
+        global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.test(user_ID, 'store')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
