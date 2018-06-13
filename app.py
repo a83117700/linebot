@@ -23,7 +23,7 @@ line_bot_api = LineBotApi('Hr4G/v9C8g+GDrUeyBN0t0u9WlqjxBsUOuRJquRl7mOd/QVOzC5ac
 global status 
 status = 'init'
 global user_ID
-user_ID = event.source.user_id
+
 
 
 @app.route('/')
@@ -55,6 +55,8 @@ def callback():
 def handle_text_message(event):                  # default
     text = event.message.text #message from user
     global status
+    global user_ID
+    user_ID = event.source.user_id
     
     if(status == 'init'):
         if(text == 'Hi'):
@@ -131,7 +133,6 @@ def handle_text_message(event):                  # default
             google_sheet_log.record_log(user_ID, 'food', 'record_failed', text)
         else:
             #try:
-            global user_ID
             user_ID = event.source.user_id
             google_sheet.insert_sheet(
                                         user_ID, 
@@ -326,14 +327,12 @@ def handle_postback(event):
         line_bot_api.reply_message(event.reply_token, message)
         google_sheet_log.record_log(user_ID, 'retrieve', 'press_retrieve', text)
     elif (event.postback.data =='like'):
-        global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.retrieve(user_ID, 'like')
         msg = msg + '輸入Hi可以回到選單喔'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         google_sheet_log.record_log(user_ID, 'retrieve', 'press_like', text)
     elif( event.postback.data =='hate'):
-        global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.retrieve(user_ID, 'hate')
         msg = msg + '輸入Hi可以回到選單喔'
@@ -362,13 +361,11 @@ def handle_postback(event):
         line_bot_api.reply_message(event.reply_token,msg)
         google_sheet_log.record_log(user_ID, 'test_init', 'press_test', text)
     elif( event.postback.data =='test_food'):
-        global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.test(user_ID, 'food')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
         google_sheet_log.record_log(user_ID, 'test_food', 'test_food', text)
     elif( event.postback.data =='test_store'):
-        global user_ID
         user_ID = event.source.user_id
         msg = google_sheet.test(user_ID, 'store')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
