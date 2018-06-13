@@ -13,7 +13,7 @@ from linebot.models import (
 )
 import os
 import Luis_handler
-import google_sheet
+import google_sheet, google_sheet_log
 
 app = Flask(__name__)
 
@@ -54,7 +54,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)  # default
 def handle_text_message(event):                  # default
     text = event.message.text #message from user
-    global status
     global user_ID
     user_ID = event.source.user_id
     
@@ -94,7 +93,6 @@ def handle_text_message(event):                  # default
     elif(status == 'food'):
         text_entity = Luis_handler.luis(text)
         if(text == 'Hi'):
-            global status
             status = 'init'
             msg = TemplateSendMessage(
                     alt_text='Buttons template',
@@ -262,7 +260,6 @@ def handle_text_message(event):                  # default
     else:
         if(text == 'Hi'):
             google_sheet_log.record_log(user_ID, 'unknow', 'hi', text)
-            global status
             status = 'init'
             msg = TemplateSendMessage(
                     alt_text='Buttons template',
@@ -297,14 +294,12 @@ def handle_text_message(event):                  # default
 @handler.add(PostbackEvent)
 def handle_postback(event):
     if( event.postback.data == 'food'):
-        global status
         status = 'food'
         msg = '請以一句話詳細的紀錄她喜歡或討厭的食物\n紀錄完請輸入Hi回到選單'
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=msg))
     
     elif( event.postback.data == 'retrieve'):
-        global status
         status = 'retrieve'
         message = TemplateSendMessage(
             alt_text='Confirm template',
@@ -340,7 +335,6 @@ def handle_postback(event):
         google_sheet_log.record_log(user_ID, 'retrieve', 'press_hate', text)
     
     elif(event.postback.data =='test'):
-        global status
         status = 'test_init'
         msg = TemplateSendMessage(
             alt_text='Confirm template',
