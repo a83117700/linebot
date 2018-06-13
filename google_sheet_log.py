@@ -25,7 +25,7 @@ def record_log(ID, status, action, word):
 	sheet = authority_sheet()	
 
 	date = time.strftime("%c")
-	sheet.insert_row([date, ID, status, action, word], 2)
+	sheet.insert_row([date, ID, str(status), str(action), str(word)], 2)
 
 
 
