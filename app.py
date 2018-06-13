@@ -56,7 +56,7 @@ def handle_text_message(event):                  # default
     text = event.message.text #message from user
     global user_ID
     user_ID = event.source.user_id
-    
+    global status
     if(status == 'init'):
         if(text == 'Hi'):
             message = TemplateSendMessage(
