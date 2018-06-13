@@ -21,7 +21,7 @@ def auth_gss_client(path, scopes):
     credentials = ServiceAccountCredentials.from_json_keyfile_name(path, scopes)
     return gspread.authorize(credentials)
 
-def record_log(ID, status, action, word):
+def record_log(ID, status, action, word='None'):
 	sheet = authority_sheet()	
 
 	date = time.strftime("%c")
