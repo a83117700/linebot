@@ -4,7 +4,6 @@
 
 ## 教學示範影片
 <a href="https://github.com/a83117700/linebot/blob/master/tech_video.MOV">下載教學示範影片</a>
-[![Watch the video](https://github.com/a83117700/linebot/blob/master/tech_video.MOV.png)](https://github.com/a83117700/linebot/blob/master/tech_video.MOV)
     
 ## 加入app
 ![image](https://github.com/a83117700/linebot/blob/master/QRcode_AddFriend.png)  
@@ -18,4 +17,7 @@
 3.	第三個功能是踩雷測試，選取要測試的是食物或是店家，輸入要踩雷的東西，會去你已記錄過的資料中，去找是喜歡的或是不喜歡的，來看看是否踩雷。
 
 三個主要功能都在Menu選單可以直接點選，照著line bot回應的流程操作即可，若是想跳出現在的功能，只要輸入”Hi”即可跳回menu選單。
+
+Oliver Yao
+a83117700@gmail.com
 
