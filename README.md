@@ -4,7 +4,7 @@
 
 ## 教學示範影片
 <a href="https://github.com/a83117700/linebot/blob/master/tech_video.MOV">下載教學示範影片</a>
-
+[![Watch the video](https://github.com/a83117700/linebot/blob/master/tech_video.MOV.png)](https://github.com/a83117700/linebot/blob/master/tech_video.MOV)
     
 ## 加入app
 ![image](https://github.com/a83117700/linebot/blob/master/QRcode_AddFriend.png)  
